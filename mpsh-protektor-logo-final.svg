@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 70">
+  <!-- Texto MPSH (verde) -->
+  <text x="10" y="40" font-family="Arial Black, sans-serif" font-size="32" font-weight="900" fill="#2E8B57" letter-spacing="1px">MPSH</text>
+  
+  <!-- Texto protektor (azul escuro) -->
+  <text x="10" y="65" font-family="Arial Black, sans-serif" font-size="32" font-weight="900" fill="#1B4F72" letter-spacing="0.5px">protektor</text>
+</svg>
