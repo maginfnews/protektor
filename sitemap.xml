@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    
+    <!-- Página Principal -->
+    <url>
+        <loc>https://suaempresa.com.br/mpsh-protektor</loc>
+        <lastmod>2024-10-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://suaempresa.com.br/images/mpsh-protektor-hero.jpg</image:loc>
+            <image:title>MPSH-PROTEKTOR Sistema de Proteção Hidráulica</image:title>
+            <image:caption>Sistema inteligente de proteção hidráulica para tratores e escavadeiras</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Seção Como Funciona -->
+    <url>
+        <loc>https://suaempresa.com.br/mpsh-protektor#como-funciona</loc>
+        <lastmod>2024-10-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Seção Vantagens -->
+    <url>
+        <loc>https://suaempresa.com.br/mpsh-protektor#vantagens</loc>
+        <lastmod>2024-10-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Seção Sustentabilidade -->
+    <url>
+        <loc>https://suaempresa.com.br/mpsh-protektor#sobre</loc>
+        <lastmod>2024-10-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Formulário de Orçamento -->
+    <url>
+        <loc>https://suaempresa.com.br/mpsh-protektor#orcamento</loc>
+        <lastmod>2024-10-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Contato -->
+    <url>
+        <loc>https://suaempresa.com.br/mpsh-protektor#contato</loc>
+        <lastmod>2024-10-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+</urlset>

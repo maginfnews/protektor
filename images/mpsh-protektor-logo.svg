@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <!-- Escudo base -->
+  <path d="M250 50 L150 100 L150 200 Q150 350 250 450 Q350 350 350 200 L350 100 Z" fill="#f8f9fa" stroke="#1B4332" stroke-width="8"/>
+  
+  <!-- Engrenagem laranja -->
+  <circle cx="250" cy="80" r="35" fill="#FF6B35"/>
+  <path d="M250 45 L255 60 L245 60 Z M285 80 L270 85 L270 75 Z M250 115 L245 100 L255 100 Z M215 80 L230 75 L230 85 Z" fill="#FF6B35"/>
+  
+  <!-- Gota de óleo -->
+  <path d="M250 120 Q235 135 235 150 Q235 165 250 165 Q265 165 265 150 Q265 135 250 120 Z" fill="#1B4332"/>
+  <circle cx="245" cy="145" r="3" fill="#16A085" opacity="0.7"/>
+  
+  <!-- Trator -->
+  <g transform="translate(280, 180)">
+    <!-- Corpo do trator -->
+    <rect x="0" y="0" width="40" height="20" rx="3" fill="#1B4332"/>
+    <!-- Chaminé -->
+    <rect x="35" y="-8" width="4" height="8" fill="#1B4332"/>
+    <!-- Rodas -->
+    <circle cx="8" cy="20" r="8" fill="#1B4332"/>
+    <circle cx="32" cy="20" r="12" fill="#1B4332"/>
+    <circle cx="8" cy="20" r="4" fill="#16A085"/>
+    <circle cx="32" cy="20" r="6" fill="#16A085"/>
+  </g>
+  
+  <!-- Campos verdes ondulados -->
+  <path d="M150 220 Q200 200 250 220 Q300 240 350 220 L350 280 Q300 260 250 280 Q200 300 150 280 Z" fill="#27AE60"/>
+  <path d="M150 250 Q200 230 250 250 Q300 270 350 250 L350 310 Q300 290 250 310 Q200 330 150 310 Z" fill="#16A085"/>
+  <path d="M150 280 Q200 260 250 280 Q300 300 350 280 L350 340 Q300 320 250 340 Q200 360 150 340 Z" fill="#2ECC71"/>
+  
+  <!-- Linhas de proteção -->
+  <path d="M170 320 Q220 300 270 320" stroke="#ffffff" stroke-width="3" fill="none"/>
+  <path d="M160 340 Q210 320 260 340" stroke="#ffffff" stroke-width="3" fill="none"/>
+  <path d="M180 360 Q230 340 280 360" stroke="#ffffff" stroke-width="3" fill="none"/>
+</svg>
