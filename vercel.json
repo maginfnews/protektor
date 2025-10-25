@@ -1,4 +1,12 @@
 {
+  "buildCommand": "echo 'No build needed for static site'",
+  "outputDirectory": ".",
+  "installCommand": "npm install",
+  "functions": {
+    "api/send-email.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "redirects": [
     {
       "source": "/sitemap",
@@ -9,6 +17,25 @@
       "source": "/robots",
       "destination": "/robots.txt",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
     }
   ]
 }
