@@ -246,7 +246,87 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(27, 67, 50, 0.8);
+    background: rgba(27, 67, 50, 0.6);
+}
+
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(46, 204, 113, 0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: particleFloat 8s infinite ease-in-out;
+}
+
+.particle:nth-child(1) {
+    width: 20px;
+    height: 20px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    width: 15px;
+    height: 15px;
+    top: 60%;
+    left: 80%;
+    animation-delay: 2s;
+}
+
+.particle:nth-child(3) {
+    width: 25px;
+    height: 25px;
+    top: 80%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+.particle:nth-child(4) {
+    width: 12px;
+    height: 12px;
+    top: 30%;
+    left: 70%;
+    animation-delay: 1s;
+}
+
+.particle:nth-child(5) {
+    width: 18px;
+    height: 18px;
+    top: 70%;
+    left: 60%;
+    animation-delay: 3s;
+}
+
+.particle:nth-child(6) {
+    width: 22px;
+    height: 22px;
+    top: 10%;
+    left: 90%;
+    animation-delay: 5s;
+}
+
+.particle:nth-child(7) {
+    width: 16px;
+    height: 16px;
+    top: 90%;
+    left: 40%;
+    animation-delay: 6s;
+}
+
+.particle:nth-child(8) {
+    width: 14px;
+    height: 14px;
+    top: 40%;
+    left: 30%;
+    animation-delay: 7s;
 }
 
 .hero-content {
@@ -267,12 +347,17 @@ body {
 
 .hero-logo-text {
     font-family: "Arial Black", Arial, sans-serif;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(4rem, 10vw, 8rem);
     font-weight: 900;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease;
-    animation: pulse 3s infinite;
+    text-shadow: 
+        0 0 20px rgba(46, 204, 113, 0.8),
+        0 0 40px rgba(22, 160, 133, 0.6),
+        0 4px 12px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+    animation: heroGlow 4s ease-in-out infinite;
     cursor: pointer;
+    position: relative;
+    z-index: 3;
 }
 
 .hero-logo-text:hover {
@@ -756,10 +841,16 @@ body {
 .quote-form-container {
     max-width: 800px;
     margin: 0 auto;
-    background: var(--white);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.9));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(22, 160, 133, 0.2);
     padding: 50px;
-    border-radius: 16px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.5);
+    position: relative;
+    overflow: hidden;
 }
 
 .form-row {
@@ -784,11 +875,13 @@ body {
 .form-group select {
     width: 100%;
     padding: 15px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
+    border: 2px solid rgba(22, 160, 133, 0.2);
+    border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    color: var(--forest-green);
 }
 
 .form-group input:focus,
@@ -1273,6 +1366,41 @@ body {
 @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
+}
+
+@keyframes heroGlow {
+    0%, 100% { 
+        text-shadow: 
+            0 0 20px rgba(46, 204, 113, 0.8),
+            0 0 40px rgba(22, 160, 133, 0.6),
+            0 4px 12px rgba(0, 0, 0, 0.8);
+    }
+    50% { 
+        text-shadow: 
+            0 0 30px rgba(46, 204, 113, 1),
+            0 0 60px rgba(22, 160, 133, 0.8),
+            0 0 80px rgba(46, 204, 113, 0.4),
+            0 4px 12px rgba(0, 0, 0, 0.8);
+    }
+}
+
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px) scale(1);
+        opacity: 0.7;
+    }
+    25% {
+        transform: translateY(-20px) translateX(10px) scale(1.1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-10px) translateX(-15px) scale(0.9);
+        opacity: 0.8;
+    }
+    75% {
+        transform: translateY(-30px) translateX(5px) scale(1.2);
+        opacity: 0.9;
+    }
 }
 
 .step-card,
