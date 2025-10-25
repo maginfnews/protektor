@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
         // Template do email para a empresa
         const emailToCompany = await resend.emails.send({
-            from: 'MPSHPROTEKTOR <noreply@maginf.com.br>',
+            from: 'MPSHPROTEKTOR <noreply@sendprotektor.com>',
             to: ['sac@maginf.com.br'],
             subject: `🚜 Nova Solicitação de Orçamento - ${empresa}`,
             html: `
@@ -85,7 +85,7 @@ export default async function handler(req, res) {
 
         // Email de confirmação para o cliente
         const emailToClient = await resend.emails.send({
-            from: 'MPSHPROTEKTOR <noreply@maginf.com.br>',
+            from: 'MPSHPROTEKTOR <noreply@sendprotektor.com>',
             to: [email],
             subject: '✅ Solicitação Recebida - MPSHPROTEKTOR | MAGINF TECNOLOGIA',
             html: `
