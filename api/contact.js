@@ -81,21 +81,48 @@ module.exports = async function handler(req, res) {
             `
         };
 
-        // Enviar via Resend API usando fetch nativo
-        const response = await fetch('https://api.resend.com/emails', {
+        // Enviar via Resend API usando https nativo
+        const https = require('https');
+        const postData = JSON.stringify(emailData);
+        
+        const options = {
+            hostname: 'api.resend.com',
+            port: 443,
+            path: '/emails',
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(emailData)
+                'Content-Length': Buffer.byteLength(postData)
+            }
+        };
+
+        const result = await new Promise((resolve, reject) => {
+            const req = https.request(options, (res) => {
+                let data = '';
+                res.on('data', (chunk) => {
+                    data += chunk;
+                });
+                res.on('end', () => {
+                    if (res.statusCode >= 200 && res.statusCode < 300) {
+                        try {
+                            resolve(JSON.parse(data));
+                        } catch (e) {
+                            resolve({ id: 'success' });
+                        }
+                    } else {
+                        reject(new Error(`Resend API error: ${res.statusCode} - ${data}`));
+                    }
+                });
+            });
+            
+            req.on('error', (error) => {
+                reject(error);
+            });
+            
+            req.write(postData);
+            req.end();
         });
-
-        if (!response.ok) {
-            throw new Error(`Resend API error: ${response.status}`);
-        }
-
-        const result = await response.json();
 
         return res.status(200).json({ 
             success: true, 
