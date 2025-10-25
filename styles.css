@@ -208,16 +208,28 @@ body {
     animation: fadeInDown 1s ease-out;
 }
 
-.hero-logo-main {
-    height: clamp(100px, 15vw, 180px);
-    width: auto;
-    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
+.hero-logo-text {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease;
     animation: pulse 3s infinite;
+    cursor: pointer;
 }
 
-.hero-logo-main:hover {
+.hero-logo-text:hover {
     transform: scale(1.05);
+}
+
+.logo-mpsh {
+    color: #2E8B57;
+    letter-spacing: 2px;
+}
+
+.logo-protektor {
+    color: #1B4F72;
+    letter-spacing: 1px;
 }
 
 .hero-title {
@@ -874,8 +886,8 @@ body {
         padding: 30px 20px;
     }
     
-    .hero-logo-main {
-        height: 120px;
+    .hero-logo-text {
+        font-size: 4rem;
     }
     
     .hero-logo-container {
@@ -955,8 +967,8 @@ body {
         width: 100%;
     }
     
-    .hero-logo-main {
-        height: 100px;
+    .hero-logo-text {
+        font-size: 3rem;
     }
     
     .hero-logo-container {
