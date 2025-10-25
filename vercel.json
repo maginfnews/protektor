@@ -1,26 +1,14 @@
 {
-  "version": 2,
-  "name": "mpsh-protektor",
-  "builds": [
+  "redirects": [
     {
-      "src": "index.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/sitemap",
-      "dest": "/sitemap.xml",
-      "status": 301
+      "source": "/sitemap",
+      "destination": "/sitemap.xml",
+      "permanent": true
     },
     {
-      "src": "/robots",
-      "dest": "/robots.txt", 
-      "status": 301
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/robots",
+      "destination": "/robots.txt",
+      "permanent": true
     }
   ],
   "headers": [
