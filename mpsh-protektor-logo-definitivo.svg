@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240">
+  <defs>
+    <!-- Gradientes -->
+    <linearGradient id="shieldBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="green1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#228B22;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1B4332;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="green2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#32CD32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="green3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#90EE90;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#32CD32;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Escudo principal -->
+  <path d="M100 15 L35 35 L35 85 Q35 145 100 185 Q165 145 165 85 L165 35 Z" 
+        fill="url(#shieldBg)" 
+        stroke="#1B4332" 
+        stroke-width="5"/>
+  
+  <!-- Engrenagem laranja semicircular no topo -->
+  <path d="M100 15 A 25 25 0 0 0 75 40 L85 40 A 15 15 0 0 1 100 25 A 15 15 0 0 1 115 40 L125 40 A 25 25 0 0 0 100 15 Z" 
+        fill="#FF6B35"/>
+  <!-- Dentes da engrenagem -->
+  <rect x="97" y="10" width="6" height="8" fill="#FF6B35"/>
+  <rect x="120" y="25" width="8" height="6" fill="#FF6B35"/>
+  <rect x="72" y="25" width="8" height="6" fill="#FF6B35"/>
+  <!-- Centro da engrenagem -->
+  <circle cx="100" cy="25" r="8" fill="#E55A2B"/>
+  
+  <!-- Gota de óleo -->
+  <path d="M100 50 Q85 70 85 85 Q85 100 100 100 Q115 100 115 85 Q115 70 100 50 Z" 
+        fill="#1B4332"/>
+  <!-- Brilho na gota -->
+  <ellipse cx="92" cy="80" rx="4" ry="6" fill="#3498DB" opacity="0.6"/>
+  
+  <!-- Trator detalhado -->
+  <g transform="translate(130, 75)">
+    <!-- Corpo do trator -->
+    <rect x="0" y="5" width="20" height="10" rx="2" fill="#1B4332"/>
+    <!-- Cabine -->
+    <rect x="12" y="0" width="8" height="8" rx="1" fill="#1B4332"/>
+    <!-- Janelas da cabine -->
+    <rect x="13" y="1" width="3" height="3" fill="#3498DB" opacity="0.7"/>
+    <rect x="17" y="1" width="2" height="3" fill="#3498DB" opacity="0.7"/>
+    <!-- Chaminé -->
+    <rect x="16" y="-3" width="2" height="3" fill="#1B4332"/>
+    <!-- Roda traseira grande -->
+    <circle cx="16" cy="15" r="6" fill="#1B4332"/>
+    <circle cx="16" cy="15" r="4" fill="#2C3E50"/>
+    <circle cx="16" cy="15" r="2" fill="#95A5A6"/>
+    <!-- Roda dianteira menor -->
+    <circle cx="4" cy="15" r="4" fill="#1B4332"/>
+    <circle cx="4" cy="15" r="2" fill="#2C3E50"/>
+  </g>
+  
+  <!-- Campos verdes em camadas -->
+  <path d="M35 100 Q67 90 100 100 Q133 110 165 100 L165 120 Q133 130 100 120 Q67 110 35 120 Z" 
+        fill="url(#green1)"/>
+  <path d="M35 115 Q67 105 100 115 Q133 125 165 115 L165 135 Q133 145 100 135 Q67 125 35 135 Z" 
+        fill="url(#green2)"/>
+  <path d="M35 130 Q67 120 100 130 Q133 140 165 130 L165 150 Q133 160 100 150 Q67 140 35 150 Z" 
+        fill="url(#green3)"/>
+  
+  <!-- Linhas de proteção curvas -->
+  <path d="M45 145 Q82 135 125 145" stroke="#ffffff" stroke-width="4" fill="none" opacity="0.9"/>
+  <path d="M40 160 Q77 150 120 160" stroke="#ffffff" stroke-width="4" fill="none" opacity="0.9"/>
+  <path d="M50 175 Q87 165 130 175" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.8"/>
+  
+  <!-- Texto MPSH (verde) -->
+  <text x="15" y="215" font-family="Arial Black, sans-serif" font-size="32" font-weight="900" fill="#2E8B57" letter-spacing="1px">MPSH</text>
+  
+  <!-- Texto PROTEKTOR (azul escuro) -->
+  <text x="15" y="240" font-family="Arial Black, sans-serif" font-size="32" font-weight="900" fill="#1B4F72" letter-spacing="1px">PROTEKTOR</text>
+</svg>
