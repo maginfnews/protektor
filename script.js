@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             // Enviar para API do Resend
-            const response = await fetch('/api/send-email', {
+            const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
