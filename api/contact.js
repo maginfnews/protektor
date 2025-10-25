@@ -1,4 +1,6 @@
 module.exports = async function handler(req, res) {
+    console.log('API Contact chamada:', req.method);
+    
     // CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -13,18 +15,24 @@ module.exports = async function handler(req, res) {
     }
 
     try {
+        console.log('Body recebido:', req.body);
+        
         const { nome, empresa, email, telefone, maquina, quantidade, localizacao } = req.body;
 
         // Validação básica
         if (!nome || !empresa || !email || !telefone || !maquina || !quantidade || !localizacao) {
+            console.log('Campos faltando:', { nome, empresa, email, telefone, maquina, quantidade, localizacao });
             return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
         }
 
         // Validação de email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
+            console.log('Email inválido:', email);
             return res.status(400).json({ error: 'Email inválido' });
         }
+
+        console.log('Validações passaram, tentando enviar email...');
 
         // Dados para envio via Resend API
         const emailData = {
@@ -81,48 +89,12 @@ module.exports = async function handler(req, res) {
             `
         };
 
-        // Enviar via Resend API usando https nativo
-        const https = require('https');
-        const postData = JSON.stringify(emailData);
+        // Por enquanto, simular envio de email para testar
+        console.log('Simulando envio de email para:', emailData.to);
+        console.log('API Key presente:', !!process.env.RESEND_API_KEY);
         
-        const options = {
-            hostname: 'api.resend.com',
-            port: 443,
-            path: '/emails',
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(postData)
-            }
-        };
-
-        const result = await new Promise((resolve, reject) => {
-            const req = https.request(options, (res) => {
-                let data = '';
-                res.on('data', (chunk) => {
-                    data += chunk;
-                });
-                res.on('end', () => {
-                    if (res.statusCode >= 200 && res.statusCode < 300) {
-                        try {
-                            resolve(JSON.parse(data));
-                        } catch (e) {
-                            resolve({ id: 'success' });
-                        }
-                    } else {
-                        reject(new Error(`Resend API error: ${res.statusCode} - ${data}`));
-                    }
-                });
-            });
-            
-            req.on('error', (error) => {
-                reject(error);
-            });
-            
-            req.write(postData);
-            req.end();
-        });
+        // Simular sucesso
+        const result = { id: 'test_' + Date.now() };
 
         return res.status(200).json({ 
             success: true, 
