@@ -150,13 +150,17 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const email = formData.get('email');
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email || !emailRegex.test(email)) {
-            errors.push('E-mail válido é obrigatório');
+        if (!email || email.trim() === '') {
+            errors.push('E-mail é obrigatório');
+        } else if (!emailRegex.test(email)) {
+            errors.push('Por favor, insira um e-mail válido (exemplo: nome@empresa.com.br)');
         }
         
         const telefone = formData.get('telefone');
-        if (!telefone || telefone.replace(/\D/g, '').length < 10) {
-            errors.push('Telefone deve ter pelo menos 10 dígitos');
+        if (!telefone || telefone.trim() === '') {
+            errors.push('Telefone é obrigatório');
+        } else if (telefone.replace(/\D/g, '').length < 10) {
+            errors.push('Telefone deve ter pelo menos 10 dígitos (exemplo: (11) 99999-9999)');
         }
         
         if (!formData.get('maquina')) {
@@ -299,6 +303,67 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicialização
     function init() {
+        // Validação em tempo real para campos obrigatórios
+        function setupRealTimeValidation() {
+            const emailField = document.getElementById('email');
+            const telefoneField = document.getElementById('telefone');
+            
+            if (emailField) {
+                emailField.addEventListener('blur', function() {
+                    const email = this.value.trim();
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    
+                    if (email === '') {
+                        this.style.borderColor = '#e74c3c';
+                        showFieldHint(this, 'E-mail é obrigatório');
+                    } else if (!emailRegex.test(email)) {
+                        this.style.borderColor = '#e74c3c';
+                        showFieldHint(this, 'Formato inválido (exemplo: nome@empresa.com.br)');
+                    } else {
+                        this.style.borderColor = '#2ECC71';
+                        removeFieldHint(this);
+                    }
+                });
+            }
+            
+            if (telefoneField) {
+                telefoneField.addEventListener('blur', function() {
+                    const telefone = this.value.trim();
+                    
+                    if (telefone === '') {
+                        this.style.borderColor = '#e74c3c';
+                        showFieldHint(this, 'Telefone é obrigatório');
+                    } else if (telefone.replace(/\D/g, '').length < 10) {
+                        this.style.borderColor = '#e74c3c';
+                        showFieldHint(this, 'Mínimo 10 dígitos (exemplo: (11) 99999-9999)');
+                    } else {
+                        this.style.borderColor = '#2ECC71';
+                        removeFieldHint(this);
+                    }
+                });
+            }
+        }
+        
+        // Mostrar dica no campo
+        function showFieldHint(field, message) {
+            removeFieldHint(field);
+            const hint = document.createElement('div');
+            hint.className = 'field-hint';
+            hint.style.color = '#e74c3c';
+            hint.style.fontSize = '0.85rem';
+            hint.style.marginTop = '5px';
+            hint.textContent = message;
+            field.parentNode.appendChild(hint);
+        }
+        
+        // Remover dica do campo
+        function removeFieldHint(field) {
+            const existingHint = field.parentNode.querySelector('.field-hint');
+            if (existingHint) {
+                existingHint.remove();
+            }
+        }
+        
         // Event listeners
         window.addEventListener('scroll', handleHeaderScroll);
         
@@ -306,12 +371,14 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenuToggle.addEventListener('click', toggleMobileMenu);
         }
         
+        setupSmoothScroll();
+        setupRealTimeValidation();
+        
         if (quoteForm) {
             quoteForm.addEventListener('submit', handleFormSubmit);
         }
         
         // Setup das funcionalidades
-        setupSmoothScroll();
         setupFormValidation();
         setupScrollAnimations();
         setupParallax();
