@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Envio do formulário
-    function handleFormSubmit(e) {
+    async function handleFormSubmit(e) {
         e.preventDefault();
         
         const formData = new FormData(quoteForm);
@@ -192,45 +192,105 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Limpar erros anteriores
         document.querySelectorAll('.field-error').forEach(error => error.remove());
-        document.querySelectorAll('.form-group input, .form-group select').forEach(field => {
-            field.style.borderColor = '#E5E7EB';
-        });
         
         if (errors.length > 0) {
             // Mostrar erros
-            alert('Por favor, corrija os seguintes erros:\n\n' + errors.join('\n'));
+            errors.forEach(error => {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'field-error';
+                errorDiv.style.color = '#e74c3c';
+                errorDiv.style.background = '#fdf2f2';
+                errorDiv.style.padding = '10px';
+                errorDiv.style.borderRadius = '5px';
+                errorDiv.style.margin = '5px 0';
+                errorDiv.style.border = '1px solid #e74c3c';
+                errorDiv.textContent = error;
+                quoteForm.insertBefore(errorDiv, quoteForm.firstChild);
+            });
+            
+            // Scroll para o primeiro erro
+            quoteForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
             return;
         }
         
-        // Simular envio (aqui você integraria com seu backend)
+        // Preparar dados para envio
         const submitButton = quoteForm.querySelector('.submit-button');
         const originalText = submitButton.innerHTML;
         
-        // Loading state
         submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
         submitButton.disabled = true;
         
-        // Simular delay de envio
-        setTimeout(() => {
-            // Esconder formulário e mostrar mensagem de sucesso
-            quoteForm.style.display = 'none';
-            successMessage.style.display = 'block';
+        try {
+            // Enviar para API do Resend
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nome: formData.get('nome'),
+                    empresa: formData.get('empresa'),
+                    email: formData.get('email'),
+                    telefone: formData.get('telefone'),
+                    maquina: formData.get('maquina'),
+                    quantidade: formData.get('quantidade'),
+                    localizacao: formData.get('localizacao')
+                })
+            });
             
-            // Scroll para a mensagem de sucesso
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const result = await response.json();
             
-            // Aqui você enviaria os dados para seu servidor
-            console.log('Dados do formulário:', Object.fromEntries(formData));
-            
-            // Opcional: Enviar para Google Analytics ou outras ferramentas
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'form_submit', {
-                    event_category: 'engagement',
-                    event_label: 'quote_request'
-                });
+            if (response.ok && result.success) {
+                // Sucesso
+                quoteForm.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Reset do formulário
+                quoteForm.reset();
+                
+                // Scroll para a mensagem de sucesso
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Google Analytics - Evento de conversão
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit', {
+                        event_category: 'engagement',
+                        event_label: 'quote_request',
+                        value: 1
+                    });
+                }
+                
+            } else {
+                throw new Error(result.error || 'Erro ao enviar solicitação');
             }
             
-        }, 2000);
+        } catch (error) {
+            console.error('Erro ao enviar formulário:', error);
+            
+            // Mostrar erro para o usuário
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'field-error';
+            errorDiv.style.color = '#e74c3c';
+            errorDiv.style.background = '#fdf2f2';
+            errorDiv.style.padding = '15px';
+            errorDiv.style.borderRadius = '8px';
+            errorDiv.style.margin = '10px 0';
+            errorDiv.style.border = '1px solid #e74c3c';
+            errorDiv.innerHTML = `
+                <strong>❌ Erro ao enviar solicitação</strong><br>
+                ${error.message || 'Tente novamente em alguns minutos ou entre em contato diretamente.'}<br>
+                <small>📧 sac@maginf.com.br | 📱 +55 (11) 4610-6363</small>
+            `;
+            quoteForm.insertBefore(errorDiv, quoteForm.firstChild);
+            
+            // Scroll para o erro
+            quoteForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+        } finally {
+            // Restaurar botão
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
+        }
     }
     
     // Animações de entrada

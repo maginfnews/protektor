@@ -1,0 +1,29 @@
+{
+  "name": "mpsh-protektor-landing",
+  "version": "1.0.0",
+  "description": "Landing page para MPSHPROTEKTOR - Sistema de Proteção Hidráulica",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "start": "python -m http.server 3000"
+  },
+  "dependencies": {
+    "resend": "^3.2.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  },
+  "keywords": [
+    "mpsh-protektor",
+    "sistema-hidraulico",
+    "agronegocio",
+    "maginf-tecnologia"
+  ],
+  "author": "MAGINF TECNOLOGIA",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maginfnews/protektor.git"
+  }
+}
