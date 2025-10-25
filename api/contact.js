@@ -89,12 +89,34 @@ module.exports = async function handler(req, res) {
             `
         };
 
-        // Por enquanto, simular envio de email para testar
-        console.log('Simulando envio de email para:', emailData.to);
+        // Enviar email real via Resend API
+        console.log('Enviando email real para:', emailData.to);
         console.log('API Key presente:', !!process.env.RESEND_API_KEY);
         
-        // Simular sucesso
-        const result = { id: 'test_' + Date.now() };
+        if (!process.env.RESEND_API_KEY) {
+            throw new Error('RESEND_API_KEY não configurada');
+        }
+
+        // Usar fetch global (disponível no Node.js 18+)
+        const response = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(emailData)
+        });
+
+        console.log('Resposta Resend status:', response.status);
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.log('Erro Resend:', errorText);
+            throw new Error(`Resend API error: ${response.status} - ${errorText}`);
+        }
+
+        const result = await response.json();
+        console.log('Email enviado com sucesso:', result.id);
 
         return res.status(200).json({ 
             success: true, 
