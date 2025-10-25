@@ -400,3 +400,62 @@ if ('IntersectionObserver' in window) {
         imageObserver.observe(img);
     });
 }
+
+// Animação de números das estatísticas
+function animateStats() {
+    const statCards = document.querySelectorAll('.stat-card');
+    
+    if (!statCards.length) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const card = entry.target;
+                const numberElement = card.querySelector('.stat-number');
+                const targetValue = parseInt(card.dataset.stat);
+                
+                if (!numberElement || !targetValue) return;
+                
+                const isPercentage = numberElement.textContent.includes('%');
+                const isCurrency = numberElement.textContent.includes('R$');
+                const isHours = numberElement.textContent.includes('h');
+                const isPlus = numberElement.textContent.includes('+');
+                
+                let currentValue = 0;
+                const increment = targetValue / 100;
+                const duration = 2000; // 2 segundos
+                const stepTime = duration / 100;
+                
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    
+                    if (currentValue >= targetValue) {
+                        currentValue = targetValue;
+                        clearInterval(timer);
+                    }
+                    
+                    let displayValue = Math.floor(currentValue);
+                    
+                    if (isCurrency) {
+                        displayValue = `R$ ${displayValue.toLocaleString('pt-BR')}`;
+                    } else if (isPercentage) {
+                        displayValue = `${displayValue}%`;
+                    } else if (isHours) {
+                        displayValue = `${displayValue}h`;
+                    } else if (isPlus) {
+                        displayValue = `${displayValue.toLocaleString('pt-BR')}+`;
+                    }
+                    
+                    numberElement.textContent = displayValue;
+                }, stepTime);
+                
+                observer.unobserve(card);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statCards.forEach(card => observer.observe(card));
+}
+
+// Inicializar animação das estatísticas
+document.addEventListener('DOMContentLoaded', animateStats);
