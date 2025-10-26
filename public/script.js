@@ -639,11 +639,20 @@ Data: ${new Date().toLocaleString('pt-BR')}`);
             }
         }
         
+        // Tracking do YouTube
+        if (e.target.closest('.youtube-float') || e.target.closest('.social-link[href*="youtube"]')) {
+            if (typeof window.va !== 'undefined') {
+                window.va('track', 'YouTube Click', {
+                    source: e.target.closest('.youtube-float') ? 'floating_button' : 'footer_link'
+                });
+            }
+        }
+        
         // Tracking do Facebook
-        if (e.target.closest('.social-link[href*="facebook"]')) {
+        if (e.target.closest('.facebook-float') || e.target.closest('.social-link[href*="facebook"]')) {
             if (typeof window.va !== 'undefined') {
                 window.va('track', 'Facebook Click', {
-                    source: 'footer_link'
+                    source: e.target.closest('.facebook-float') ? 'floating_button' : 'footer_link'
                 });
             }
         }
