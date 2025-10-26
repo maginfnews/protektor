@@ -639,6 +639,15 @@ Data: ${new Date().toLocaleString('pt-BR')}`);
             }
         }
         
+        // Tracking do Facebook
+        if (e.target.closest('.social-link[href*="facebook"]')) {
+            if (typeof window.va !== 'undefined') {
+                window.va('track', 'Facebook Click', {
+                    source: 'footer_link'
+                });
+            }
+        }
+        
         // Tracking do botão Seja um Representante
         if (e.target.matches('.representative-button') || e.target.closest('.representative-button')) {
             if (typeof window.va !== 'undefined') {
