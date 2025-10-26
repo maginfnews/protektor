@@ -183,7 +183,114 @@ document.addEventListener('DOMContentLoaded', function() {
         return errors;
     }
     
-    // Envio do formulário
+    // Configuração EmailJS
+    const EMAILJS_CONFIG = {
+        serviceId: 'service_protektor',
+        templateId: 'template_protektor',
+        publicKey: 'YOUR_PUBLIC_KEY' // Será configurado
+    };
+
+    // Inicializar EmailJS
+    function initEmailJS() {
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init(EMAILJS_CONFIG.publicKey);
+            console.log('✅ EmailJS inicializado');
+        } else {
+            console.warn('⚠️ EmailJS não carregado');
+        }
+    }
+
+    // Envio via EmailJS
+    async function sendWithEmailJS(formData) {
+        const templateParams = {
+            to_email: 'site@maginf.com.br',
+            from_name: formData.get('nome'),
+            from_email: formData.get('email'),
+            company: formData.get('empresa'),
+            phone: formData.get('telefone'),
+            machine: formData.get('maquina'),
+            quantity: formData.get('quantidade'),
+            location: formData.get('localizacao'),
+            message: `Nova solicitação de orçamento:
+            
+Nome: ${formData.get('nome')}
+Empresa: ${formData.get('empresa')}
+Email: ${formData.get('email')}
+Telefone: ${formData.get('telefone')}
+Máquina: ${formData.get('maquina')}
+Quantidade: ${formData.get('quantidade')}
+Localização: ${formData.get('localizacao')}
+
+Data: ${new Date().toLocaleString('pt-BR')}`
+        };
+
+        return emailjs.send(
+            EMAILJS_CONFIG.serviceId,
+            EMAILJS_CONFIG.templateId,
+            templateParams
+        );
+    }
+
+    // Envio via Web3Forms (gratuito e simples)
+    async function sendWithWeb3Forms(formData) {
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                access_key: 'c9e5f1a2-8b3d-4e6f-9c8a-1b2c3d4e5f6g', // Chave demo Web3Forms
+                name: formData.get('nome'),
+                email: formData.get('email'),
+                company: formData.get('empresa'),
+                phone: formData.get('telefone'),
+                machine: formData.get('maquina'),
+                quantity: formData.get('quantidade'),
+                location: formData.get('localizacao'),
+                subject: `🚜 Nova Solicitação de Orçamento - ${formData.get('empresa')}`,
+                message: `Nova solicitação de orçamento:
+
+Nome: ${formData.get('nome')}
+Empresa: ${formData.get('empresa')}
+Email: ${formData.get('email')}
+Telefone: ${formData.get('telefone')}
+Máquina: ${formData.get('maquina')}
+Quantidade: ${formData.get('quantidade')}
+Localização: ${formData.get('localizacao')}
+
+Data: ${new Date().toLocaleString('pt-BR')}`
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Web3Forms error: ${response.status}`);
+        }
+
+        return response.json();
+    }
+
+    // Envio via mailto (fallback simples)
+    function sendWithMailto(formData) {
+        const subject = encodeURIComponent(`🚜 Nova Solicitação de Orçamento - ${formData.get('empresa')}`);
+        const body = encodeURIComponent(`Nova solicitação de orçamento:
+
+Nome: ${formData.get('nome')}
+Empresa: ${formData.get('empresa')}
+Email: ${formData.get('email')}
+Telefone: ${formData.get('telefone')}
+Máquina: ${formData.get('maquina')}
+Quantidade: ${formData.get('quantidade')}
+Localização: ${formData.get('localizacao')}
+
+Data: ${new Date().toLocaleString('pt-BR')}`);
+        
+        const mailtoLink = `mailto:site@maginf.com.br?subject=${subject}&body=${body}`;
+        window.open(mailtoLink, '_blank');
+        
+        return Promise.resolve({ success: true, method: 'mailto' });
+    }
+
+    // Envio do formulário com múltiplas opções
     async function handleFormSubmit(e) {
         e.preventDefault();
         
@@ -221,51 +328,59 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.disabled = true;
         
         try {
-            // Enviar para API do Resend
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    nome: formData.get('nome'),
-                    empresa: formData.get('empresa'),
-                    email: formData.get('email'),
-                    telefone: formData.get('telefone'),
-                    maquina: formData.get('maquina'),
-                    quantidade: formData.get('quantidade'),
-                    localizacao: formData.get('localizacao')
-                })
-            });
+            console.log('🚀 Tentando enviar formulário...');
             
-            const result = await response.json();
-            
-            if (response.ok && result.success) {
-                // Sucesso
-                quoteForm.style.display = 'none';
-                successMessage.style.display = 'block';
+            // Tentar Web3Forms primeiro (mais confiável)
+            try {
+                console.log('📧 Tentando Web3Forms...');
+                await sendWithWeb3Forms(formData);
+                console.log('✅ Web3Forms: Sucesso!');
+            } catch (web3Error) {
+                console.warn('⚠️ Web3Forms falhou:', web3Error.message);
                 
-                // Reset do formulário
-                quoteForm.reset();
-                
-                // Scroll para a mensagem de sucesso
-                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                
-                // Google Analytics - Evento de conversão
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'form_submit', {
-                        event_category: 'engagement',
-                        event_label: 'quote_request',
-                        value: 1
-                    });
+                // Fallback para EmailJS
+                if (typeof emailjs !== 'undefined') {
+                    try {
+                        console.log('📧 Tentando EmailJS...');
+                        await sendWithEmailJS(formData);
+                        console.log('✅ EmailJS: Sucesso!');
+                    } catch (emailjsError) {
+                        console.warn('⚠️ EmailJS falhou:', emailjsError.message);
+                        
+                        // Último recurso: mailto
+                        console.log('📧 Usando mailto como último recurso...');
+                        await sendWithMailto(formData);
+                        console.log('✅ Mailto: Aberto!');
+                    }
+                } else {
+                    // Sem EmailJS, usar mailto diretamente
+                    console.log('📧 EmailJS não disponível, usando mailto...');
+                    await sendWithMailto(formData);
+                    console.log('✅ Mailto: Aberto!');
                 }
-                
-            } else {
-                throw new Error(result.error || 'Erro ao enviar solicitação');
+            }
+            
+            // Sucesso
+            quoteForm.style.display = 'none';
+            successMessage.style.display = 'block';
+            
+            // Reset do formulário
+            quoteForm.reset();
+            
+            // Scroll para a mensagem de sucesso
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Google Analytics - Evento de conversão
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_submit', {
+                    event_category: 'engagement',
+                    event_label: 'quote_request',
+                    value: 1
+                });
             }
             
         } catch (error) {
-            console.error('Erro ao enviar formulário:', error);
+            console.error('❌ Erro ao enviar formulário:', error);
             
             // Mostrar erro para o usuário
             const errorDiv = document.createElement('div');

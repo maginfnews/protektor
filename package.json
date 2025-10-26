@@ -4,11 +4,11 @@
   "description": "Landing page para MPSHPROTEKTOR - Sistema de Proteção Hidráulica",
   "main": "index.html",
   "scripts": {
-    "dev": "vercel dev",
     "build": "echo 'Static site ready' && exit 0",
     "start": "python -m http.server 3000"
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "resend": "^3.2.0"
   },
   "devDependencies": {

@@ -36,8 +36,8 @@ module.exports = async function handler(req, res) {
 
         // Dados para envio via Resend API
         const emailData = {
-            from: 'MPSHPROTEKTOR <noreply@sendprotektor.com>',
-            to: ['sac@maginf.com.br'],
+            from: 'MPSHPROTEKTOR <noreply@notificacao.protektor.com.br>',
+            to: ['site@maginf.com.br'],
             subject: `🚜 Nova Solicitação de Orçamento - ${empresa}`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -90,10 +90,16 @@ module.exports = async function handler(req, res) {
         };
 
         // Enviar email real via Resend API
+        console.log('=== DEBUG RESEND ===');
         console.log('Enviando email real para:', emailData.to);
         console.log('API Key presente:', !!process.env.RESEND_API_KEY);
+        console.log('API Key length:', process.env.RESEND_API_KEY ? process.env.RESEND_API_KEY.length : 0);
+        console.log('API Key prefix:', process.env.RESEND_API_KEY ? process.env.RESEND_API_KEY.substring(0, 10) + '...' : 'undefined');
+        console.log('NODE_ENV:', process.env.NODE_ENV);
+        console.log('Todas as env vars:', Object.keys(process.env).filter(key => key.includes('RESEND')));
         
         if (!process.env.RESEND_API_KEY) {
+            console.error('❌ RESEND_API_KEY não encontrada nas variáveis de ambiente');
             throw new Error('RESEND_API_KEY não configurada');
         }
 
