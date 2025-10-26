@@ -20,8 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Menu mobile toggle
     function toggleMobileMenu() {
+        const navActions = document.querySelector('.nav-actions');
+        
         navMenu.classList.toggle('active');
         mobileMenuToggle.classList.toggle('active');
+        
+        // Também mostrar os botões de ação no mobile
+        if (navActions) {
+            navActions.classList.toggle('active');
+        }
         
         // Animação do hambúrguer
         const spans = mobileMenuToggle.querySelectorAll('span');
@@ -43,6 +50,11 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
+                
+                // Fechar menu mobile se estiver aberto
+                if (navMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
                 
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
