@@ -377,6 +377,7 @@ body {
     display: block;
 }
 
+
 .hero-logo-text {
     font-family: "Arial Black", Arial, sans-serif;
     font-size: clamp(4rem, 10vw, 8rem);

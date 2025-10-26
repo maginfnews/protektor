@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Servidor e Arquivos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .test { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background: #d4edda; border-color: #c3e6cb; }
+        .error { background: #f8d7da; border-color: #f5c6cb; }
+        .info { background: #d1ecf1; border-color: #bee5eb; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Debug do Servidor</h1>
+        
+        <div class="test info">
+            <h3>1. Teste de Fetch da Imagem</h3>
+            <button onclick="testFetch()">Testar Fetch</button>
+            <div id="fetch-result"></div>
+        </div>
+        
+        <div class="test info">
+            <h3>2. Teste de Headers HTTP</h3>
+            <button onclick="testHeaders()">Verificar Headers</button>
+            <div id="headers-result"></div>
+        </div>
+        
+        <div class="test info">
+            <h3>3. Teste de Outros Arquivos PNG</h3>
+            <button onclick="testOtherImages()">Testar Outras Imagens</button>
+            <div id="other-images-result"></div>
+        </div>
+        
+        <div class="test info">
+            <h3>4. Informações do Navegador</h3>
+            <div id="browser-info">
+                <strong>User Agent:</strong> <span id="user-agent"></span><br>
+                <strong>URL Atual:</strong> <span id="current-url"></span><br>
+                <strong>Protocolo:</strong> <span id="protocol"></span>
+            </div>
+        </div>
+        
+        <div class="test info">
+            <h3>5. Teste de Carregamento Direto</h3>
+            <p>Clique no link abaixo para tentar acessar a imagem diretamente:</p>
+            <a href="produto-mpsh-protektor.png" target="_blank">produto-mpsh-protektor.png</a>
+        </div>
+    </div>
+
+    <script>
+        // Informações do navegador
+        document.getElementById('user-agent').textContent = navigator.userAgent;
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('protocol').textContent = window.location.protocol;
+        
+        async function testFetch() {
+            const result = document.getElementById('fetch-result');
+            result.innerHTML = '<p>⏳ Testando...</p>';
+            
+            try {
+                const response = await fetch('produto-mpsh-protektor.png');
+                const contentType = response.headers.get('content-type');
+                const contentLength = response.headers.get('content-length');
+                
+                if (response.ok) {
+                    result.innerHTML = `
+                        <p>✅ Fetch bem-sucedido!</p>
+                        <p><strong>Status:</strong> ${response.status}</p>
+                        <p><strong>Content-Type:</strong> ${contentType}</p>
+                        <p><strong>Content-Length:</strong> ${contentLength} bytes</p>
+                        <p><strong>URL:</strong> ${response.url}</p>
+                    `;
+                } else {
+                    result.innerHTML = `<p>❌ Erro: ${response.status} - ${response.statusText}</p>`;
+                }
+            } catch (error) {
+                result.innerHTML = `<p>❌ Erro: ${error.message}</p>`;
+            }
+        }
+        
+        async function testHeaders() {
+            const result = document.getElementById('headers-result');
+            result.innerHTML = '<p>⏳ Verificando headers...</p>';
+            
+            try {
+                const response = await fetch('produto-mpsh-protektor.png', { method: 'HEAD' });
+                const headers = {};
+                for (let [key, value] of response.headers.entries()) {
+                    headers[key] = value;
+                }
+                
+                result.innerHTML = `
+                    <p>✅ Headers recebidos:</p>
+                    <pre>${JSON.stringify(headers, null, 2)}</pre>
+                `;
+            } catch (error) {
+                result.innerHTML = `<p>❌ Erro: ${error.message}</p>`;
+            }
+        }
+        
+        async function testOtherImages() {
+            const result = document.getElementById('other-images-result');
+            result.innerHTML = '<p>⏳ Testando outras imagens...</p>';
+            
+            const testImages = [
+                'favicon.ico',
+                'apple-touch-icon.png',
+                'favicon-96x96.png'
+            ];
+            
+            let results = [];
+            
+            for (const img of testImages) {
+                try {
+                    const response = await fetch(img);
+                    if (response.ok) {
+                        results.push(`✅ ${img}: OK (${response.headers.get('content-type')})`);
+                    } else {
+                        results.push(`❌ ${img}: ${response.status}`);
+                    }
+                } catch (error) {
+                    results.push(`❌ ${img}: ${error.message}`);
+                }
+            }
+            
+            result.innerHTML = `<pre>${results.join('\n')}</pre>`;
+        }
+        
+        // Teste automático ao carregar
+        window.onload = function() {
+            testFetch();
+        };
+    </script>
+</body>
+</html>

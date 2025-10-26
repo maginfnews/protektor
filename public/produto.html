@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR" itemscope itemtype="https://schema.org/Product">
+<head>
+    <!-- Meta Tags Básicas -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#1B4332">
+    
+    <!-- SEO Meta Tags -->
+    <title>MPSH-Protektor - Sistema de Proteção Hidráulica | Produto</title>
+    <meta name="description" content="Conheça o MPSH-Protektor: sistema inteligente de proteção hidráulica compatível com VALTRA, AGCO, CASE IH, CAT, FENDT e JOHN DEERE. Evite vazamentos e multas ambientais.">
+    <meta name="keywords" content="MPSH-Protektor, sistema hidráulico, proteção hidráulica, agronegócio, VALTRA, AGCO, CASE IH, CAT, FENDT, JOHN DEERE">
+    <meta name="author" content="MAGINF TECNOLOGIA">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://protektor.com.br/produto.html">
+    <meta property="og:title" content="MPSH-Protektor - Sistema de Proteção Hidráulica">
+    <meta property="og:description" content="Sistema inteligente de proteção hidráulica para máquinas agrícolas. Compatível com as principais marcas do mercado.">
+    <meta property="og:image" content="https://protektor.com.br/produto-mpsh-protektor.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://protektor.com.br/produto.html">
+    <meta property="twitter:title" content="MPSH-Protektor - Sistema de Proteção Hidráulica">
+    <meta property="twitter:description" content="Sistema inteligente de proteção hidráulica para máquinas agrícolas.">
+    <meta property="twitter:image" content="https://protektor.com.br/produto-mpsh-protektor.png">
+    
+    <!-- CSS e Fonts -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* CSS básico do navbar */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-image {
+            height: 40px;
+            width: auto;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #1B4332;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #16A085;
+        }
+        
+        .cta-button-header {
+            background: #16A085;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button-header:hover {
+            background: #1B4332;
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+        
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #1B4332;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .product-hero {
+            background: linear-gradient(135deg, #1B4332 0%, #16A085 50%, #2ECC71 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px; /* Espaço para o navbar fixo */
+        }
+        
+        .product-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="20" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .product-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .product-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .product-showcase {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product-image-container {
+            margin-bottom: 30px;
+        }
+        
+        .product-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+            transition: all 0.3s ease;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5));
+        }
+        
+        .compatibility-section {
+            margin-top: 30px;
+        }
+        
+        .compatibility-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .compatibility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .compatibility-badge {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .compatibility-badge:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #2ECC71;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .feature-description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        
+        @media (max-width: 768px) {
+            .product-hero {
+                padding-top: 70px; /* Ajuste para mobile */
+            }
+            
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .cta-button-header {
+                display: none; /* Esconde o botão CTA em mobile */
+            }
+            
+            .product-showcase {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            
+            .compatibility-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
+            }
+            
+            .compatibility-badge {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .features-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="mpsh-protektor-logo-final.svg" 
+                         alt="MPSHPROTEKTOR" 
+                         class="logo-image"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="logo-fallback" style="display:none; align-items:center; font-size:20px; font-weight:bold;">
+                        <span style="color:#2E8B57;">MPSH</span><span style="color:#1B4F72;">PROTEKTOR</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#sobre" class="nav-link">Sobre</a></li>
+                <li><a href="produto.html" class="nav-link" style="color: #16A085; font-weight: 600;">Produto</a></li>
+                <li><a href="index.html#como-funciona" class="nav-link">Como Funciona</a></li>
+                <li><a href="index.html#vantagens" class="nav-link">Vantagens</a></li>
+                <li><a href="index.html#contato" class="nav-link">Contato</a></li>
+            </ul>
+            <a href="index.html#orcamento" class="cta-button-header">Solicitar Orçamento</a>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="product-hero">
+        <div class="product-content">
+            <h1 class="product-title">
+                🛡️ MPSH-PROTEKTOR
+            </h1>
+            <p class="product-subtitle">
+                Sistema inteligente de proteção hidráulica para máquinas agrícolas e equipamentos pesados
+            </p>
+            
+            <div class="product-showcase">
+                <div class="product-image-container">
+                    <div class="image-wrapper" style="position: relative;">
+                        <img id="product-img" 
+                             src="produto-mpsh-protektor.png" 
+                             alt="MPSH-Protektor - Sistema de Proteção Hidráulica" 
+                             class="product-image"
+                             style="display: none; max-width: 100%; height: auto;"
+                             onload="showImage()"
+                             onerror="showFallback()">
+                        
+                        <!-- Fallback melhorado -->
+                        <div id="image-fallback" style="
+                            display: flex; 
+                            flex-direction: column; 
+                            align-items: center; 
+                            justify-content: center; 
+                            min-height: 400px; 
+                            background: linear-gradient(135deg, #1B4332, #16A085); 
+                            border-radius: 15px;
+                            color: white;
+                            text-align: center;
+                            padding: 40px;
+                        ">
+                            <i class="fas fa-microchip" style="font-size: 5rem; margin-bottom: 30px; opacity: 0.9;"></i>
+                            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 15px;">MPSH-PROTEKTOR</div>
+                            <div style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 20px;">Sistema de Proteção Hidráulica</div>
+                            <div style="font-size: 1rem; opacity: 0.7; max-width: 400px; line-height: 1.5;">
+                                Módulo inteligente compatível com VALTRA, AGCO, CASE IH, CAT, FENDT e JOHN DEERE
+                            </div>
+                            <button onclick="tryLoadImage()" style="
+                                margin-top: 20px;
+                                background: rgba(255,255,255,0.2);
+                                border: 1px solid rgba(255,255,255,0.3);
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 20px;
+                                cursor: pointer;
+                                font-size: 0.9rem;
+                            ">
+                                🔄 Tentar carregar imagem
+                            </button>
+                        </div>
+                        
+                        <!-- Loading indicator -->
+                        <div id="loading-indicator" style="
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            background: rgba(0,0,0,0.8);
+                            color: white;
+                            padding: 15px 25px;
+                            border-radius: 10px;
+                            display: none;
+                        ">
+                            <i class="fas fa-spinner fa-spin"></i> Carregando imagem...
+                        </div>
+                    </div>
+                </div>
+                
+                <script>
+                    function showImage() {
+                        console.log('✅ Imagem carregada com sucesso!');
+                        document.getElementById('product-img').style.display = 'block';
+                        document.getElementById('image-fallback').style.display = 'none';
+                        document.getElementById('loading-indicator').style.display = 'none';
+                    }
+                    
+                    function showFallback() {
+                        console.log('❌ Erro ao carregar imagem, mostrando fallback');
+                        document.getElementById('product-img').style.display = 'none';
+                        document.getElementById('image-fallback').style.display = 'flex';
+                        document.getElementById('loading-indicator').style.display = 'none';
+                    }
+                    
+                    function tryLoadImage() {
+                        console.log('🔄 Tentando recarregar imagem...');
+                        document.getElementById('loading-indicator').style.display = 'block';
+                        
+                        const img = document.getElementById('product-img');
+                        const timestamp = new Date().getTime();
+                        img.src = `produto-mpsh-protektor.png?t=${timestamp}`;
+                        
+                        setTimeout(() => {
+                            if (document.getElementById('loading-indicator').style.display !== 'none') {
+                                showFallback();
+                            }
+                        }, 5000);
+                    }
+                    
+                    // Tentar carregar automaticamente após 1 segundo
+                    setTimeout(() => {
+                        if (document.getElementById('product-img').style.display === 'none') {
+                            console.log('⏳ Imagem não carregou, tentando novamente...');
+                            tryLoadImage();
+                        }
+                    }, 1000);
+                </script>
+                
+                <div class="compatibility-section">
+                    <h3 class="compatibility-title">
+                        <i class="fas fa-check-circle"></i> Compatível com as principais marcas
+                    </h3>
+                    <div class="compatibility-grid">
+                        <div class="compatibility-badge">VALTRA</div>
+                        <div class="compatibility-badge">AGCO</div>
+                        <div class="compatibility-badge">CASE IH</div>
+                        <div class="compatibility-badge">CAT</div>
+                        <div class="compatibility-badge">FENDT</div>
+                        <div class="compatibility-badge">JOHN DEERE</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features-section">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Proteção Inteligente</h3>
+                    <p class="feature-description">
+                        Sistema avançado de monitoramento que detecta falhas hidráulicas em tempo real, 
+                        prevenindo vazamentos antes que causem danos ambientais.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="feature-title">Conformidade Ambiental</h3>
+                    <p class="feature-description">
+                        Evita multas de até R$ 50 milhões conforme Lei 9.605/98 (Crimes Ambientais), 
+                        protegendo o meio ambiente e sua empresa.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="feature-title">Fácil Instalação</h3>
+                    <p class="feature-description">
+                        Compatível com múltiplas marcas e modelos, instalação simples e rápida 
+                        sem necessidade de modificações estruturais na máquina.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Monitoramento 24/7</h3>
+                    <p class="feature-description">
+                        Supervisão contínua do sistema hidráulico com alertas instantâneos 
+                        e relatórios detalhados de performance e manutenção.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="feature-title">Manutenção Preditiva</h3>
+                    <p class="feature-description">
+                        Identifica problemas antes que se tornem críticos, reduzindo custos 
+                        de manutenção e aumentando a vida útil dos equipamentos.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Conectividade IoT</h3>
+                    <p class="feature-description">
+                        Acesso remoto via aplicativo móvel, permitindo monitoramento 
+                        da frota em tempo real, onde quer que você esteja.
+                    </p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px;">
+                <a href="index.html#orcamento" style="display: inline-block; background: linear-gradient(135deg, #2ECC71, #16A085); color: white; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease;">
+                    <i class="fas fa-paper-plane"></i> Solicitar Orçamento
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "MPSH-PROTEKTOR",
+        "description": "Sistema inteligente de proteção hidráulica para máquinas agrícolas compatível com VALTRA, AGCO, CASE IH, CAT, FENDT e JOHN DEERE",
+        "brand": {
+            "@type": "Brand",
+            "name": "MPSH-Protektor Tecnology"
+        },
+        "manufacturer": {
+            "@type": "Organization",
+            "name": "MAGINF TECNOLOGIA"
+        },
+        "category": "Sistema de Proteção Hidráulica",
+        "image": "https://protektor.com.br/produto-mpsh-protektor.png",
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "priceCurrency": "BRL",
+            "seller": {
+                "@type": "Organization",
+                "name": "MAGINF TECNOLOGIA"
+            }
+        }
+    }
+    </script>
+</body>
+</html>
