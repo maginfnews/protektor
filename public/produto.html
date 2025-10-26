@@ -41,89 +41,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* CSS básico do navbar */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            padding: 16px 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .logo a {
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-image {
-            height: 40px;
-            width: auto;
-        }
-        
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .nav-link {
-            text-decoration: none;
-            color: #1B4332;
-            font-weight: 500;
-            font-size: 16px;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: #16A085;
-        }
-        
-        .cta-button-header {
-            background: #16A085;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .cta-button-header:hover {
-            background: #1B4332;
-            transform: translateY(-2px);
-        }
-        
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-        }
-        
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: #1B4332;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
+        /* CSS específico da página de produto */
         
         .product-hero {
             background: linear-gradient(135deg, #1B4332 0%, #16A085 50%, #2ECC71 100%);
@@ -288,12 +206,12 @@
                 display: none;
             }
             
-            .mobile-menu-toggle {
-                display: flex;
+            .nav-actions {
+                display: none;
             }
             
-            .cta-button-header {
-                display: none; /* Esconde o botão CTA em mobile */
+            .mobile-menu-toggle {
+                display: flex;
             }
             
             .product-showcase {
@@ -339,12 +257,20 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html#sobre" class="nav-link">Sobre</a></li>
-                <li><a href="produto.html" class="nav-link" style="color: #16A085; font-weight: 600;">Produto</a></li>
+                <li><a href="produto.html" class="nav-link">Produto</a></li>
                 <li><a href="index.html#como-funciona" class="nav-link">Como Funciona</a></li>
                 <li><a href="index.html#vantagens" class="nav-link">Vantagens</a></li>
                 <li><a href="index.html#contato" class="nav-link">Contato</a></li>
             </ul>
-            <a href="index.html#orcamento" class="cta-button-header">Solicitar Orçamento</a>
+            <div class="nav-actions">
+                <a href="index.html#orcamento" class="cta-button-header">Solicitar Orçamento</a>
+                <a href="representante.html" class="representative-button">
+                    <i class="fas fa-handshake"></i> Seja um Representante
+                </a>
+                <a href="#" class="client-area-button">
+                    <i class="fas fa-user-circle"></i> Área de Cliente
+                </a>
+            </div>
             <div class="mobile-menu-toggle">
                 <span></span>
                 <span></span>

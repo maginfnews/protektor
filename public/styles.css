@@ -86,9 +86,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -119,7 +121,11 @@ body {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    justify-content: center;
 }
 
 .nav-link {
@@ -149,11 +155,17 @@ body {
     width: 100%;
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .cta-button-header {
     background: var(--primary-green);
     color: var(--white);
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 25px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -164,6 +176,58 @@ body {
     background: var(--dark-green);
     transform: translateY(-2px);
     box-shadow: var(--shadow-strong);
+}
+
+.client-area-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--forest-green);
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border: 2px solid var(--primary-green);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.client-area-button:hover {
+    background: var(--primary-green);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(22, 160, 133, 0.3);
+}
+
+.client-area-button i {
+    font-size: 16px;
+}
+
+.representative-button {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+}
+
+.representative-button:hover {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.4);
+}
+
+.representative-button i {
+    font-size: 16px;
 }
 
 .mobile-menu-toggle {
@@ -1197,6 +1261,10 @@ body {
         display: none;
     }
     
+    .nav-actions {
+        display: none;
+    }
+    
     .mobile-menu-toggle {
         display: flex;
     }
@@ -1304,6 +1372,14 @@ body {
     
     .hero-logo-container {
         margin-bottom: 25px;
+    }
+    
+    .instagram-float {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
     }
     
     .hero-title {
@@ -1484,6 +1560,45 @@ html {
 :focus {
     outline: 2px solid var(--primary-green);
     outline-offset: 2px;
+}
+
+/* Botão flutuante Instagram */
+.instagram-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    animation: pulse-instagram 2s infinite;
+}
+
+.instagram-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+    animation: none;
+}
+
+@keyframes pulse-instagram {
+    0% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(240, 148, 51, 0.5);
+    }
+    100% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
 }
 
 /* Estados de hover para botões */

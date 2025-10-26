@@ -622,6 +622,31 @@ Data: ${new Date().toLocaleString('pt-BR')}`);
                 window.va('track', 'Product Page Click');
             }
         }
+        
+        // Tracking do botão Área de Cliente
+        if (e.target.matches('.client-area-button')) {
+            if (typeof window.va !== 'undefined') {
+                window.va('track', 'Client Area Click');
+            }
+        }
+        
+        // Tracking do Instagram
+        if (e.target.closest('.instagram-float') || e.target.closest('.social-link[href*="instagram"]')) {
+            if (typeof window.va !== 'undefined') {
+                window.va('track', 'Instagram Click', {
+                    source: e.target.closest('.instagram-float') ? 'floating_button' : 'footer_link'
+                });
+            }
+        }
+        
+        // Tracking do botão Seja um Representante
+        if (e.target.matches('.representative-button') || e.target.closest('.representative-button')) {
+            if (typeof window.va !== 'undefined') {
+                window.va('track', 'Representative Button Click', {
+                    page: window.location.pathname
+                });
+            }
+        }
     });
     
 });
