@@ -239,7 +239,7 @@ Data: ${new Date().toLocaleString('pt-BR')}`
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                access_key: '01e90458-808e-41e5-83fc-0f2a42c93945', // Chave real Web3Forms
+                access_key: '69da808d-ff05-4d39-986e-55cccda23f2c', // Nova chave Web3Forms
                 name: formData.get('nome'),
                 email: formData.get('email'),
                 company: formData.get('empresa'),
