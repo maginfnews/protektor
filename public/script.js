@@ -364,6 +364,15 @@ Data: ${new Date().toLocaleString('pt-BR')}`);
             quoteForm.style.display = 'none';
             successMessage.style.display = 'block';
             
+            // Tracking do envio de formulário
+            if (typeof window.va !== 'undefined') {
+                window.va('track', 'Form Submitted', {
+                    empresa: formData.get('empresa'),
+                    maquina: formData.get('maquina'),
+                    quantidade: formData.get('quantidade')
+                });
+            }
+            
             // Reset do formulário
             quoteForm.reset();
             
@@ -596,6 +605,25 @@ Data: ${new Date().toLocaleString('pt-BR')}`);
         }
     };
     
+    // Tracking de clicks em CTAs
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.cta-button-hero, .cta-button-header')) {
+            if (typeof window.va !== 'undefined') {
+                window.va('track', 'CTA Click', {
+                    button: e.target.textContent.trim(),
+                    location: e.target.className
+                });
+            }
+        }
+        
+        // Tracking de navegação para página do produto
+        if (e.target.matches('a[href="produto.html"]')) {
+            if (typeof window.va !== 'undefined') {
+                window.va('track', 'Product Page Click');
+            }
+        }
+    });
+    
 });
 
 // Função para integração com Google Analytics (opcional)
@@ -624,6 +652,14 @@ document.documentElement.classList.add(
     isMobile ? 'is-mobile' : 'is-desktop',
     isTablet ? 'is-tablet' : 'is-not-tablet'
 );
+
+// Tracking de visualização de página
+if (typeof window.va !== 'undefined') {
+    window.va('track', 'Page View', {
+        page: window.location.pathname,
+        device: isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop'
+    });
+}
 
 // Performance: Lazy loading para imagens (se houver)
 if ('IntersectionObserver' in window) {
