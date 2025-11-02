@@ -792,3 +792,117 @@ function animateStats() {
 
 // Inicializar animação das estatísticas
 document.addEventListener('DOMContentLoaded', animateStats);
+
+// ========================================
+// FUNCIONALIDADE TEMA NOVEMBRO AZUL
+// ========================================
+
+// Função para alternar tema Novembro Azul
+function toggleNovenbroAzulTheme() {
+    const body = document.body;
+    const toggleButton = document.getElementById('temaToggle');
+    const isNovenbroAzul = body.classList.contains('novembro-azul');
+    
+    if (isNovenbroAzul) {
+        // Desativar tema Novembro Azul
+        body.classList.remove('novembro-azul');
+        toggleButton.classList.remove('active');
+        toggleButton.innerHTML = '<i class="fas fa-palette"></i><span>Novembro Azul</span>';
+        localStorage.setItem('novenbroAzulTheme', 'false');
+        
+        // Analytics event (se disponível)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'theme_change', {
+                'event_category': 'UI',
+                'event_label': 'Tema Normal Ativado'
+            });
+        }
+    } else {
+        // Ativar tema Novembro Azul
+        body.classList.add('novembro-azul');
+        toggleButton.classList.add('active');
+        toggleButton.innerHTML = '<i class="fas fa-heart"></i><span>Tema Normal</span>';
+        localStorage.setItem('novenbroAzulTheme', 'true');
+        
+        // Analytics event (se disponível)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'theme_change', {
+                'event_category': 'UI',
+                'event_label': 'Novembro Azul Ativado'
+            });
+        }
+        
+        // Mostrar mensagem de conscientização (apenas na primeira vez)
+        if (!localStorage.getItem('novenbroAzulMessageShown')) {
+            setTimeout(() => {
+                alert('💙 Novembro Azul ativado!\n\nLembre-se: cuidar da saúde é tão importante quanto proteger suas máquinas.\n\nFaça seus exames preventivos regularmente!');
+                localStorage.setItem('novenbroAzulMessageShown', 'true');
+            }, 1000);
+        }
+    }
+}
+
+// Função para verificar e aplicar tema salvo
+function checkSavedTheme() {
+    const savedTheme = localStorage.getItem('novenbroAzulTheme');
+    const toggleButton = document.getElementById('temaToggle');
+    
+    if (savedTheme === 'true') {
+        document.body.classList.add('novembro-azul');
+        if (toggleButton) {
+            toggleButton.classList.add('active');
+            toggleButton.innerHTML = '<i class="fas fa-heart"></i><span>Tema Normal</span>';
+        }
+    }
+}
+
+// Função para detectar se estamos em novembro e ativar automaticamente
+function checkNovenbroAzulMonth() {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth(); // 0 = Janeiro, 10 = Novembro
+    
+    // Se estamos em novembro (mês 10) e o usuário nunca interagiu com o tema
+    if (currentMonth === 10 && !localStorage.getItem('novenbroAzulTheme')) {
+        // Ativar automaticamente após 3 segundos
+        setTimeout(() => {
+            if (!document.body.classList.contains('novembro-azul')) {
+                toggleNovenbroAzulTheme();
+            }
+        }, 3000);
+    }
+}
+
+// Inicializar funcionalidades do tema
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar tema salvo
+    checkSavedTheme();
+    
+    // Verificar se é novembro para ativação automática
+    checkNovenbroAzulMonth();
+    
+    // Adicionar event listener ao botão de alternância
+    const toggleButton = document.getElementById('temaToggle');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', toggleNovenbroAzulTheme);
+        
+        // Adicionar tooltip hover
+        toggleButton.addEventListener('mouseenter', function() {
+            const isActive = document.body.classList.contains('novembro-azul');
+            this.title = isActive ? 
+                'Clique para voltar ao tema normal' : 
+                'Clique para ativar o tema Novembro Azul';
+        });
+    }
+    
+    // Adicionar animação suave ao alternar tema
+    const style = document.createElement('style');
+    style.textContent = `
+        body {
+            transition: all 0.3s ease;
+        }
+        * {
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+    `;
+    document.head.appendChild(style);
+});
